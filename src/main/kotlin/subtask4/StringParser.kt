@@ -21,10 +21,8 @@ class StringParser {
                      }  else onePlus--
                     }
                 }
-                //workArray += (inputString.substring(i + 1)).substringBefore(delim)
             }
         }
-
         return workArray
     }
 
@@ -32,8 +30,6 @@ class StringParser {
     {
         if (char == '(') return ')'
         if (char == '[') return ']'
-        //if (char == '<') return '>'
-        //return ''
         return '>'
     }
 }
