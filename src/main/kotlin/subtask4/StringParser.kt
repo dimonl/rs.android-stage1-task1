@@ -7,21 +7,33 @@ class StringParser {
 
         var workArray = emptyArray<String>()
         var charArr = inputString.toCharArray()
-
-        for(i in 0 until charArr.size){
+        var delim: Char
+        var onePlus = 0
+        for (i in 0 until charArr.size) {
             if (charArr[i] == '<' || charArr[i] == '(' || charArr[i] == '[') {
-                var delim = if(charArr[i] == '<') '>' else if(charArr[i] == '(') ')' else ']'
-                workArray += (inputString.substring(i+1)).substringBefore(delim)
+                delim = pairBracket(charArr[i])
+                for (j in i + 1 until charArr.size) {
+                    if (charArr[j] == charArr[i]) onePlus++
+                    else if (charArr[j] == delim){
+                     if (onePlus == 0){
+                         workArray += inputString.substring(i+1, j)
+                         break
+                     }  else onePlus--
+                    }
+                }
+                //workArray += (inputString.substring(i + 1)).substringBefore(delim)
             }
         }
 
-//        for(i in 0 until charArr.size){
-//            if (charArr[i] == '<' || charArr[i] == '(' || charArr[i] == '[') {
-//                var delim = if(charArr[i] == '<') '>' else if(charArr[i] == '(') ')' else ']'
-//                workArray += (inputString.substring(i+1)).substringBefore(delim)
-//            }
-//        }
-
         return workArray
+    }
+
+    fun pairBracket(char: Char):Char
+    {
+        if (char == '(') return ')'
+        if (char == '[') return ']'
+        //if (char == '<') return '>'
+        //return ''
+        return '>'
     }
 }
